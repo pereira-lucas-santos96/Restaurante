@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\restaurante;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\facades\Auth; //importado manual 
+
 class RestauranteController extends Controller
 {
+
+    public function __construct(Request $request)  
+    {
+        $this->middleware('auth', ['except'=>['index']]); //verifica se o usuario pode acessar a pagina solicitada, caso não ele será redirecionado para pagina login.
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class RestauranteController extends Controller
      */
     public function index()
     {
-        //
+        return 'entrou index';
     }
 
     /**
@@ -24,7 +32,7 @@ class RestauranteController extends Controller
      */
     public function create()
     {
-        //
+        return 'entrou create' .Auth::user()->name;
     }
 
     /**
